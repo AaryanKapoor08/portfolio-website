@@ -1,0 +1,228 @@
+import React from 'react';
+import { motion, type Variants } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import Section from '@/components/ui/Section';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const listContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const listItem: Variants = {
+  hidden: { opacity: 0, x: -24 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+const experiences = [
+  {
+    title: 'Undergraduate Researcher, First Author',
+    org: 'University of New Brunswick · Supervisor: Dr. Andrew Fisher',
+    date: 'July 2026 - Present',
+    link: { to: '/research', label: 'Read about the research' },
+    location: 'Fredericton, NB',
+    points: [
+      'Undergraduate research on whether a multi-step agent pipeline (planner, coder, checker) beats single-prompt generation when a small local LLM writes Arduino firmware, giving both sides the same compiler evidence and attempt limit so the study measures structure, not feedback.',
+      'Built the Python research harness that grades firmware by running it in a Wokwi simulator against hidden checks, so a program that prints "LED ON" without ever driving the pin fails.',
+    ],
+  },
+  {
+    title: 'Best Student Team Award',
+    org: 'Anthropic Halifax Hackathon',
+    date: 'September 2026',
+    location: 'Halifax, NS',
+    points: [
+      'Won Best Student Team for ShoreCheck, a beach water-quality dashboard combining official lab samples, a self-scoring rain-based prediction model, and Sentinel-2 satellite monitoring of 43 untested lakes.',
+    ],
+  },
+  {
+    title: 'Participant',
+    org: 'HackAtlantic 2026',
+    date: '2026',
+    points: [
+      'Built Keepline, a company-memory tool that turns Slack, email, and ticket history into versioned, cited facts, flags knowledge held by only one person, and writes handoff packs for departing employees.',
+    ],
+  },
+  {
+    title: 'Participant',
+    org: 'Dual-Use Technology Hackathon, UNB',
+    date: 'May 2026',
+    location: 'Fredericton, NB',
+    points: [
+      'Built Fluo in a 48-hour team sprint: a defence procurement workflow using n8n-style automation, vendor risk checks, and a blockchain audit ledger for tamper-evident procurement events.',
+    ],
+  },
+  {
+    title: 'Open Source Contributor',
+    org: 'GirlScript Summer of Code',
+    date: '2026',
+    location: 'Remote',
+    points: [
+      'Active contributor in a large open-source mentorship program, resolving issues and landing merged pull requests across community-maintained repositories.',
+    ],
+  },
+  {
+    title: 'Participant',
+    org: 'Fredericton Ideation Boost Camp 2026',
+    date: 'January 2026',
+    location: 'Fredericton, NB',
+    points: [
+      'Participated in the 48-hour camp to design and pitch Auctus, an AI funding-discovery platform, and ship a working MVP.',
+    ],
+  },
+  {
+    title: 'Finalist',
+    org: 'Google Developer Groups Hackathon',
+    date: '2025',
+    points: [
+      'Reached the finals with MedBuddy, a voice-enabled medication assistant with speech input, spoken responses, and a live medication checklist, built with Next.js, Express, and the Groq API.',
+    ],
+  },
+  {
+    title: 'Open Source Contributor',
+    org: 'CodeSocial',
+    date: '2025',
+    location: 'Remote',
+    points: [
+      'Contributed to open-source projects through the CodeSocial program, fixing issues and getting pull requests merged.',
+    ],
+  },
+];
+
+const certifications = [
+  { name: 'Best Student Team Award', issuer: 'Anthropic Halifax Hackathon', date: 'Sep 2026' },
+  { name: 'RAG Bootcamp', issuer: 'Udemy', date: 'May 2026' },
+  { name: 'Oracle GenAI Certified', issuer: 'Oracle', date: 'Nov 2025' },
+  { name: 'Oracle APEX Cloud Developer Certified Professional', issuer: 'Oracle', date: 'Nov 2025' },
+  { name: 'HackFest Hackathon Finalist', issuer: 'GDG Cloud New Delhi', date: 'Nov 2025' },
+];
+
+const Experience: React.FC = () => {
+  return (
+    <Section id="experience" className="fn-shop">
+      <div className="text-center space-y-4 mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-foreground font-title">
+          Experience
+        </h2>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Practical work, certifications, volunteering, and education behind the projects.
+        </p>
+      </div>
+
+      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+        <motion.div
+          className="space-y-8"
+          variants={listContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          {experiences.map((experience) => (
+            <motion.div key={experience.org} variants={listItem}>
+            <Card className="border-l-4 border-l-accent bg-card/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-l-[6px] hover:shadow-lg">
+              <CardHeader>
+                <p className="text-sm text-muted-foreground">
+                  {experience.date}
+                  {experience.location && ` - ${experience.location}`}
+                </p>
+                <CardTitle className="font-title text-2xl font-normal">
+                  {experience.title}
+                </CardTitle>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {experience.org}
+                </p>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  {experience.points.map((point) => (
+                    <li key={point} className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+                {experience.link && (
+                  <Link
+                    to={experience.link.to}
+                    className="group mt-2 inline-flex items-center gap-1.5 py-2 text-sm font-medium text-accent hover:underline"
+                  >
+                    {experience.link.label}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                )}
+              </CardContent>
+            </Card>
+            </motion.div>
+          ))}
+
+          <motion.div variants={listItem}>
+          <Card className="border-l-4 border-l-primary bg-card/80 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+            <CardHeader>
+              <p className="text-sm text-muted-foreground">
+                Sept 2024 - Apr 2028 - Fredericton, NB
+              </p>
+              <CardTitle className="font-title text-2xl font-normal">
+                University of New Brunswick
+              </CardTitle>
+              <p className="text-sm font-medium text-muted-foreground">
+                Bachelor of Science in Computer Science (3rd Year)
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Relevant coursework: Java, C, SQL, Calculus I & II, Statistics, Data Analysis, Machine Language.
+              </p>
+            </CardHeader>
+          </Card>
+          </motion.div>
+        </motion.div>
+
+        <div>
+          <h3 className="text-2xl font-bold text-foreground mb-6 font-title">
+            Awards & Certifications
+          </h3>
+          <div className="space-y-4">
+            {certifications.map((certification) => (
+              <Card key={certification.name} className="bg-card/80">
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-title font-normal text-foreground">
+                      {certification.name}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {certification.issuer}
+                    </p>
+                  </div>
+                  <Badge className="shrink-0 whitespace-nowrap">{certification.date}</Badge>
+                </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <h3 className="mt-10 text-2xl font-bold text-foreground mb-6 font-title">
+            Volunteer
+          </h3>
+          <Card className="bg-card/80">
+            <CardContent className="p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-title font-normal text-foreground">
+                    Atlantic AI Summit 2026
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Supported on-site logistics across keynotes, panels, and workshops for UNB's RIDSAI applied-AI gathering.
+                  </p>
+                </div>
+                <Badge className="shrink-0 whitespace-nowrap">Jun 2026</Badge>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+export default Experience;

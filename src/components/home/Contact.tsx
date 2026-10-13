@@ -1,0 +1,58 @@
+import React from 'react';
+import Section from '@/components/ui/Section';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { profileLinks } from '@/data/profile';
+import { Download, Github, Linkedin, Mail } from 'lucide-react';
+
+const Contact: React.FC = () => {
+  return (
+    <Section id="contact" className="fn-shop">
+      <Card className="mx-auto max-w-3xl bg-card/80">
+        <CardContent className="p-8 text-center md:p-10">
+        <div className="space-y-8">
+        <div className="space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground font-title">
+            Let's Connect
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            I am always open to interesting conversations, collaborations, and opportunities.
+            Reach out if you want to build something useful with AI and the web.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button size="lg" asChild>
+            <a href={`mailto:${profileLinks.email}`}>
+              <Mail className="mr-2 h-4 w-4" />
+              {profileLinks.email}
+            </a>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <a href={profileLinks.resume} download="Aaryan_Kapoor_Resume.pdf">
+              <Download className="mr-2 h-4 w-4" />
+              Download Resume
+            </a>
+          </Button>
+        </div>
+
+        <div className="flex items-center justify-center gap-3">
+          <Button variant="outline" size="icon" asChild>
+            <a href={profileLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Github className="h-5 w-5" />
+            </a>
+          </Button>
+          <Button variant="outline" size="icon" asChild>
+            <a href={profileLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin className="h-5 w-5" />
+            </a>
+          </Button>
+        </div>
+        </div>
+        </CardContent>
+      </Card>
+    </Section>
+  );
+};
+
+export default Contact;

@@ -1,0 +1,362 @@
+/* Local fonts. Right Grotesk = body/UI (Regular for normal text, Compact
+   Medium for medium/bold weights). Mondwest = bitmap display face for titles. */
+@font-face {
+  font-family: 'Right Grotesk';
+  src: url('/fonts/PPRightGroteskText-CompactMedium.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mondwest';
+  src: url('/fonts/PPMondwest-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 220 20% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 14%;
+
+    --primary: 220 10% 20%;
+    --primary-foreground: 40 33% 98%;
+
+    --secondary: 36 25% 93%;
+    --secondary-foreground: 220 10% 20%;
+
+    --muted: 36 14% 93%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 215 30% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 30 18% 90%;
+    --input: 30 18% 90%;
+    --ring: 214 55% 53%;
+
+    --radius: 0.75rem;
+
+  }
+
+  .dark {
+    --background: 220 20% 7%;
+    --foreground: 40 33% 95%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 40 33% 95%;
+
+    --primary: 40 33% 95%;
+    --primary-foreground: 220 20% 7%;
+
+    --secondary: 220 14% 16%;
+    --secondary-foreground: 40 33% 95%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 56%;
+
+    --accent: 214 55% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 214 55% 53%;
+
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Right Grotesk', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Right Grotesk', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Minecraft sky — light-mode-only hero backdrop. A vertical blue gradient that
+   fades into the page background at the bottom so it dissolves cleanly into the
+   Featured Projects section.
+--------------------------------------------------------------------------- */
+.mc-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #4d83c9 0%,
+    #5e90d1 16%,
+    #79a6dc 38%,
+    #a3c4e6 64%,
+    #cfe0ee 84%,
+    hsl(var(--background)) 100%
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Minecraft night sky — dark-mode hero backdrop. Deep navy gradient (darkest
+   at the zenith, faint horizon glow), two layers of chunky square stars (one
+   twinkles) and the game's square pixel moon.
+--------------------------------------------------------------------------- */
+.mc-night {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #010104 0%,
+    #04091c 42%,
+    #0b1330 78%,
+    hsl(var(--background)) 100%
+  );
+}
+
+/* Square pixel stars: a tiny SVG tile blown up so every star is a chunky
+   2-4px square, like the game's star field. */
+.mc-stars {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' shape-rendering='crispEdges'%3E%3Crect x='5' y='8' width='1' height='1' fill='%23ffffff' opacity='.8'/%3E%3Crect x='22' y='3' width='2' height='2' fill='%23ffffff' opacity='.9'/%3E%3Crect x='41' y='15' width='1' height='1' fill='%23dbe4ff' opacity='.7'/%3E%3Crect x='60' y='7' width='1' height='1' fill='%23ffffff' opacity='.6'/%3E%3Crect x='75' y='20' width='2' height='2' fill='%23fff7d6' opacity='.85'/%3E%3Crect x='12' y='30' width='1' height='1' fill='%23ffffff' opacity='.75'/%3E%3Crect x='33' y='38' width='2' height='2' fill='%23dbe4ff' opacity='.8'/%3E%3Crect x='55' y='33' width='1' height='1' fill='%23ffffff' opacity='.55'/%3E%3Crect x='80' y='45' width='1' height='1' fill='%23ffffff' opacity='.7'/%3E%3Crect x='8' y='55' width='2' height='2' fill='%23ffffff' opacity='.9'/%3E%3Crect x='28' y='62' width='1' height='1' fill='%23fff7d6' opacity='.65'/%3E%3Crect x='48' y='58' width='1' height='1' fill='%23ffffff' opacity='.8'/%3E%3Crect x='68' y='70' width='2' height='2' fill='%23dbe4ff' opacity='.85'/%3E%3Crect x='85' y='78' width='1' height='1' fill='%23ffffff' opacity='.6'/%3E%3Crect x='18' y='80' width='1' height='1' fill='%23ffffff' opacity='.75'/%3E%3Crect x='40' y='85' width='1' height='1' fill='%23fff7d6' opacity='.7'/%3E%3Crect x='63' y='50' width='1' height='1' fill='%23ffffff' opacity='.5'/%3E%3C/svg%3E");
+  background-size: 360px 360px;
+  /* Stars thin out toward the horizon like in the game. */
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 92%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 92%);
+}
+/* Second layer, offset + smaller tile, gently twinkling. */
+.mc-stars--twinkle {
+  background-size: 280px 280px;
+  background-position: 140px 60px;
+  animation: mc-twinkle 5s ease-in-out infinite;
+}
+@keyframes mc-twinkle {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.35; }
+}
+
+/* The square pixel moon (8x8 sprite, crisp edges), drifting very slowly. */
+.mc-moon {
+  position: absolute;
+  top: 10%;
+  right: 12%;
+  width: 88px;
+  height: 88px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23dadde2'/%3E%3Crect x='0' y='0' width='5' height='2' fill='%23edeff3'/%3E%3Crect x='0' y='2' width='3' height='2' fill='%23edeff3'/%3E%3Crect x='4' y='2' width='1' height='1' fill='%23c6cad2'/%3E%3Crect x='1' y='3' width='1' height='1' fill='%23c6cad2'/%3E%3Crect x='5' y='3' width='2' height='2' fill='%23b8bcc5'/%3E%3Crect x='6' y='4' width='1' height='1' fill='%239da1ab'/%3E%3Crect x='2' y='5' width='2' height='1' fill='%23b8bcc5'/%3E%3Crect x='3' y='6' width='1' height='1' fill='%239da1ab'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%23b8bcc5'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  /* Faint cool halo so it reads against the sky without losing the hard square edge. */
+  box-shadow: 0 0 46px 6px rgba(190, 205, 255, 0.18);
+  animation: mc-moon-drift 90s ease-in-out infinite alternate;
+}
+/* Phones: a smaller moon tucked into the corner so it clears the headline. */
+@media (max-width: 639px) {
+  .mc-moon {
+    top: 5.5rem;
+    right: 1.25rem;
+    width: 48px;
+    height: 48px;
+    animation: none;
+  }
+}
+@keyframes mc-moon-drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-56px, 26px); }
+}
+
+/* ---------------------------------------------------------------------------
+   Featured Projects — Minecraft crafting-table theme. All rules are scoped to
+   .mc-crafting / .mc-* so the rest of the site is untouched. Same in light and
+   dark mode (Minecraft GUIs don't theme-switch).
+--------------------------------------------------------------------------- */
+.mc-crafting {
+  position: relative;
+  isolation: isolate;
+  image-rendering: pixelated;
+  background-color: #4a9e3a;
+  /* Top: tan wood strip (3 blocks tall); its bottom row is dithered with
+     transparent gaps so the green underneath peeks through for a soft merge.
+     Bottom: chunky Minecraft creeper-green pixel camo — large full-cell blocks. */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='3' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='6' height='2' fill='%23b08f52'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%238a6d3c'/%3E%3Crect x='2' y='0' width='1' height='1' fill='%23cdb079'/%3E%3Crect x='3' y='0' width='1' height='1' fill='%238a6d3c'/%3E%3Crect x='5' y='0' width='1' height='1' fill='%23cdb079'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23cdb079'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%238a6d3c'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%23cdb079'/%3E%3Crect x='4' y='1' width='1' height='1' fill='%236f5530'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%23b08f52'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%238a6d3c'/%3E%3Crect x='3' y='2' width='1' height='1' fill='%23b08f52'/%3E%3Crect x='5' y='2' width='1' height='1' fill='%23cdb079'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6' shape-rendering='crispEdges'%3E%3Crect width='6' height='6' fill='%234a9e3a'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23357a28'/%3E%3Crect x='2' y='0' width='1' height='1' fill='%23d9d9d9'/%3E%3Crect x='4' y='0' width='1' height='1' fill='%23265c1c'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%236fbf4e'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%23357a28'/%3E%3Crect x='5' y='1' width='1' height='1' fill='%23a8a8a8'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%23a8a8a8'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23357a28'/%3E%3Crect x='5' y='2' width='1' height='1' fill='%23357a28'/%3E%3Crect x='1' y='3' width='1' height='1' fill='%23357a28'/%3E%3Crect x='3' y='3' width='1' height='1' fill='%23d9d9d9'/%3E%3Crect x='4' y='3' width='1' height='1' fill='%23357a28'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%23265c1c'/%3E%3Crect x='3' y='4' width='1' height='1' fill='%23357a28'/%3E%3Crect x='5' y='4' width='1' height='1' fill='%236fbf4e'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%236fbf4e'/%3E%3Crect x='2' y='5' width='1' height='1' fill='%23a8a8a8'/%3E%3Crect x='4' y='5' width='1' height='1' fill='%236fbf4e'/%3E%3C/svg%3E");
+  background-position: 0 0, 0 0;
+  background-repeat: repeat-x, repeat;
+  background-size: 240px 120px, 240px 240px;
+}
+
+/* Beveled light GUI panel (the card frame). */
+.mc-panel {
+  border-radius: 0 !important;
+  border: 2px solid #1d1d1d;
+  background: #c6c6c6;
+  box-shadow:
+    inset 2px 2px 0 0 #fefefe,
+    inset -2px -2px 0 0 #5a5a5a,
+    0 6px 0 0 rgba(0, 0, 0, 0.35);
+}
+/* Raised title bar at the top of a panel. */
+.mc-titlebar {
+  background: linear-gradient(#cfcfcf, #b9b9b9);
+  box-shadow: inset 2px 2px 0 0 #fefefe, inset -2px -2px 0 0 #6a6a6a;
+}
+/* Inset dark "screen" well for body text. */
+.mc-well {
+  background: #373737;
+  box-shadow: inset 2px 2px 0 0 #1f1f1f, inset -2px -2px 0 0 #565656;
+}
+/* Beveled grey button / icon button. */
+.mc-btn {
+  border-radius: 0 !important;
+  background: #b6b6b6;
+  box-shadow: inset 2px 2px 0 0 #fefefe, inset -2px -2px 0 0 #5a5a5a;
+  color: #1f1f1f;
+  transition: background 0.12s;
+}
+.mc-btn:hover {
+  background: #c3d2ec; /* Minecraft's bluish hover highlight */
+}
+.mc-btn:active {
+  box-shadow: inset -2px -2px 0 0 #fefefe, inset 2px 2px 0 0 #5a5a5a;
+}
+/* Small inset tech chip. */
+.mc-chip {
+  border-radius: 0;
+  background: #565656;
+  box-shadow: inset 1px 1px 0 0 #6e6e6e, inset -1px -1px 0 0 #3a3a3a;
+  color: #ececec;
+}
+
+/* ---------------------------------------------------------------------------
+   Research page — "dig down" strata. Each section is a terrain layer (grass,
+   dirt, stone, deepslate, bedrock) that darkens with depth; content sits in
+   the same .mc-panel GUI pieces as Featured Projects. Like those panels, the
+   strata look the same in light and dark mode.
+--------------------------------------------------------------------------- */
+.mc-strata {
+  --dirt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23866043'/%3E%3Crect x='1' y='0' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='7' y='0' width='1' height='1' fill='%2379553a'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%236b4a2f'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%239b7653'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%236b4a2f'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%2379553a'/%3E%3Crect x='3' y='2' width='1' height='1' fill='%2379553a'/%3E%3Crect x='4' y='2' width='1' height='1' fill='%236b4a2f'/%3E%3Crect x='3' y='3' width='1' height='1' fill='%239b7653'/%3E%3Crect x='4' y='3' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='5' y='3' width='1' height='1' fill='%239b7653'/%3E%3Crect x='7' y='3' width='1' height='1' fill='%2379553a'/%3E%3Crect x='1' y='4' width='1' height='1' fill='%239b7653'/%3E%3Crect x='3' y='4' width='1' height='1' fill='%239b7653'/%3E%3Crect x='6' y='4' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='0' y='5' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%236b4a2f'/%3E%3Crect x='5' y='5' width='1' height='1' fill='%239b7653'/%3E%3Crect x='6' y='5' width='1' height='1' fill='%2379553a'/%3E%3Crect x='7' y='5' width='1' height='1' fill='%236b4a2f'/%3E%3Crect x='4' y='6' width='1' height='1' fill='%239b7653'/%3E%3Crect x='5' y='6' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='7' y='6' width='1' height='1' fill='%236b4a2f'/%3E%3Crect x='1' y='7' width='1' height='1' fill='%239b7653'/%3E%3Crect x='5' y='7' width='1' height='1' fill='%235a3d25'/%3E%3Crect x='6' y='7' width='1' height='1' fill='%239b7653'/%3E%3C/svg%3E");
+  --stone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%237d7d7d'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='1' y='0' width='1' height='1' fill='%23747474'/%3E%3Crect x='4' y='0' width='1' height='1' fill='%23747474'/%3E%3Crect x='5' y='0' width='1' height='1' fill='%236a6a6a'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%236a6a6a'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%23747474'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%236a6a6a'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23747474'/%3E%3Crect x='0' y='3' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='3' y='3' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='6' y='3' width='1' height='1' fill='%236a6a6a'/%3E%3Crect x='7' y='3' width='1' height='1' fill='%236a6a6a'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='2' y='4' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='3' y='4' width='1' height='1' fill='%236a6a6a'/%3E%3Crect x='0' y='5' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%23747474'/%3E%3Crect x='2' y='5' width='1' height='1' fill='%238f8f8f'/%3E%3Crect x='4' y='5' width='1' height='1' fill='%23747474'/%3E%3Crect x='5' y='5' width='1' height='1' fill='%238f8f8f'/%3E%3Crect x='4' y='6' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%235e5e5e'/%3E%3Crect x='1' y='7' width='1' height='1' fill='%23747474'/%3E%3Crect x='6' y='7' width='1' height='1' fill='%23747474'/%3E%3Crect x='7' y='7' width='1' height='1' fill='%236a6a6a'/%3E%3C/svg%3E");
+  --deepslate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%234a4a51'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='4' y='0' width='1' height='1' fill='%235a5a62'/%3E%3Crect x='7' y='0' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%23323238'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%23323238'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%23444449'/%3E%3Crect x='4' y='1' width='1' height='1' fill='%23444449'/%3E%3Crect x='5' y='1' width='1' height='1' fill='%235a5a62'/%3E%3Crect x='6' y='1' width='1' height='1' fill='%23323238'/%3E%3Crect x='1' y='2' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='4' y='2' width='1' height='1' fill='%23444449'/%3E%3Crect x='5' y='2' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='6' y='2' width='1' height='1' fill='%235a5a62'/%3E%3Crect x='4' y='3' width='1' height='1' fill='%235a5a62'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%23323238'/%3E%3Crect x='2' y='4' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='3' y='4' width='1' height='1' fill='%233c3c43'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23323238'/%3E%3Crect x='2' y='5' width='1' height='1' fill='%23323238'/%3E%3Crect x='2' y='6' width='1' height='1' fill='%23444449'/%3E%3Crect x='1' y='7' width='1' height='1' fill='%23323238'/%3E%3Crect x='2' y='7' width='1' height='1' fill='%23323238'/%3E%3Crect x='3' y='7' width='1' height='1' fill='%23444449'/%3E%3Crect x='4' y='7' width='1' height='1' fill='%23444449'/%3E%3Crect x='6' y='7' width='1' height='1' fill='%235a5a62'/%3E%3Crect x='7' y='7' width='1' height='1' fill='%23323238'/%3E%3C/svg%3E");
+  --bedrock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%233a3a3a'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23575757'/%3E%3Crect x='1' y='0' width='1' height='1' fill='%23575757'/%3E%3Crect x='5' y='0' width='1' height='1' fill='%232c2c2c'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%23121212'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%23575757'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%231e1e1e'/%3E%3Crect x='4' y='1' width='1' height='1' fill='%23575757'/%3E%3Crect x='6' y='2' width='1' height='1' fill='%231e1e1e'/%3E%3Crect x='2' y='3' width='1' height='1' fill='%231e1e1e'/%3E%3Crect x='7' y='3' width='1' height='1' fill='%231e1e1e'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%23121212'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23575757'/%3E%3Crect x='5' y='4' width='1' height='1' fill='%232c2c2c'/%3E%3Crect x='7' y='4' width='1' height='1' fill='%23575757'/%3E%3Crect x='0' y='5' width='1' height='1' fill='%232c2c2c'/%3E%3Crect x='2' y='5' width='1' height='1' fill='%231e1e1e'/%3E%3Crect x='3' y='5' width='1' height='1' fill='%23121212'/%3E%3Crect x='4' y='5' width='1' height='1' fill='%23121212'/%3E%3Crect x='6' y='5' width='1' height='1' fill='%23121212'/%3E%3Crect x='1' y='7' width='1' height='1' fill='%23575757'/%3E%3Crect x='6' y='7' width='1' height='1' fill='%23121212'/%3E%3Crect x='7' y='7' width='1' height='1' fill='%232c2c2c'/%3E%3C/svg%3E");
+  --grass: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='3' shape-rendering='crispEdges'%3E%3Crect width='8' height='2' fill='%235d9c37'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='1' y='2' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='3' y='0' width='1' height='1' fill='%236fb544'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='4' y='1' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='4' y='2' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='6' y='0' width='1' height='1' fill='%236fb544'/%3E%3Crect x='6' y='2' width='1' height='1' fill='%234a8a2c'/%3E%3Crect x='7' y='0' width='1' height='1' fill='%236fb544'/%3E%3Crect x='7' y='1' width='1' height='1' fill='%234a8a2c'/%3E%3C/svg%3E");
+}
+.mc-layer {
+  position: relative;
+  isolation: isolate;
+  image-rendering: pixelated;
+  background-color: #3a3a3a;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, var(--shade, 0)), rgba(0, 0, 0, var(--shade, 0))),
+    var(--tile);
+  background-size: auto, 256px 256px;
+  border-top: 4px solid rgba(0, 0, 0, 0.35);
+}
+.mc-layer--dirt { --tile: var(--dirt); background-color: #866043; }
+.mc-layer--stone { --tile: var(--stone); background-color: #7d7d7d; }
+.mc-layer--deepslate { --tile: var(--deepslate); background-color: #4a4a51; }
+.mc-layer--bedrock { --tile: var(--bedrock); background-color: #3a3a3a; }
+/* Grass lip on the first layer under the sky. */
+.mc-layer--grass {
+  border-top: 0;
+  background-image:
+    var(--grass),
+    linear-gradient(rgba(0, 0, 0, var(--shade, 0)), rgba(0, 0, 0, var(--shade, 0))),
+    var(--tile);
+  background-repeat: repeat-x, repeat, repeat;
+  background-size: 256px 96px, auto, 256px 256px;
+  padding-top: 3rem;
+}
+/* White GUI text with the hard drop shadow Minecraft uses for titles. */
+.mc-heading {
+  color: #ffffff;
+  text-shadow: 3px 3px 0 #3f3f3f;
+}
+.mc-subtext {
+  color: #e8e8e8;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
+}
+/* Inventory slot: sunken square, dark top-left, light bottom-right. */
+.mc-slot {
+  background: #8b8b8b;
+  box-shadow: inset 2px 2px 0 0 #373737, inset -2px -2px 0 0 #ffffff;
+}
+/* Advancement toast. */
+.mc-toast {
+  background: #212121;
+  border: 2px solid #000;
+  box-shadow: inset 2px 2px 0 0 #5a5a5a, inset -2px -2px 0 0 #101010;
+}
+
+/* ---------------------------------------------------------------------------
+   Llama belt — supply llama runs across the strip; legs swap as a 4-frame
+   sprite (each group shows for 1/4 of the cycle via the opacity blink).
+--------------------------------------------------------------------------- */
+.llama-track {
+  animation: llama-track 40s linear infinite;
+  will-change: transform;
+}
+/* Track holds two identical rows; sliding by -50% loops seamlessly. Going
+   from -50% to 0 moves the llamas left-to-right. */
+@keyframes llama-track {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .llama-track { animation: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Fortnite shop backdrop — everything from Technical Skills onward. A nuanced,
+   theme-aware wash (soft dawn light / deep twilight) scoped to .fn-shop so the
+   rest of the site is untouched. Cards keep the site's default styling.
+--------------------------------------------------------------------------- */
+.fn-shop {
+  position: relative;
+  isolation: isolate;
+  /* Light: a soft dawn-over-the-island wash that melts out of the page cream. */
+  background:
+    radial-gradient(95% 55% at 50% 0%, rgba(99, 102, 241, 0.10), transparent 60%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, #ecedf9 45%, #e5e7f5 100%);
+}
+.dark .fn-shop {
+  /* Dark: deep twilight lobby sky. */
+  background:
+    radial-gradient(110% 70% at 50% -5%, rgba(99, 130, 246, 0.18), transparent 60%),
+    linear-gradient(180deg, #131a31 0%, #0a0e1d 100%);
+}
+/* Fine film grain — keeps the big flat area from looking plasticky. */
+.fn-shop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark .fn-shop::before { opacity: 0.06; }
+
+/* Touch: let vertical swipes over a 3D stage scroll the page. OrbitControls
+   sets touch-action: none inline on its element, which traps the scroll on
+   phones; !important beats the inline style, and horizontal drags still spin. */
+.touch-scroll-y,
+.touch-scroll-y * {
+  touch-action: pan-y !important;
+}
