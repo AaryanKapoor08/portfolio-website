@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://aaryankapoor.dev/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aaryan Kapoor" />
     <meta property="og:url" content="https://aaryankapoor.dev/" />
     <meta property="og:title" content="Aaryan Kapoor | CS Student at UNB" />
     <meta property="og:description" content="Building AI developer tools, agent infrastructure, and retrieval systems with TypeScript, Python, LangGraph, and RAG." />
@@ -32,22 +33,75 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Aaryan Kapoor",
-        "jobTitle": "Computer Science Student",
-        "alumniOf": "University of New Brunswick",
-        "url": "https://aaryankapoor.dev/",
-        "sameAs": [
-          "https://github.com/AaryanKapoor08",
-          "https://www.linkedin.com/in/aaryan-kapoor-88a007332/"
-        ],
-        "knowsAbout": ["Artificial Intelligence", "RAG", "LangGraph", "React", "TypeScript", "Python"]
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://aaryankapoor.dev/#website",
+            "name": "Aaryan Kapoor",
+            "alternateName": ["aaryankapoor.dev", "Aaryan Kapoor Portfolio"],
+            "url": "https://aaryankapoor.dev/",
+            "publisher": { "@id": "https://aaryankapoor.dev/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://aaryankapoor.dev/#profilepage",
+            "url": "https://aaryankapoor.dev/",
+            "name": "Aaryan Kapoor | CS Student at UNB",
+            "isPartOf": { "@id": "https://aaryankapoor.dev/#website" },
+            "mainEntity": { "@id": "https://aaryankapoor.dev/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://aaryankapoor.dev/#person",
+            "name": "Aaryan Kapoor",
+            "givenName": "Aaryan",
+            "familyName": "Kapoor",
+            "jobTitle": "Computer Science Student",
+            "description": "Computer Science student at the University of New Brunswick building AI developer tools, agent infrastructure, and retrieval systems.",
+            "url": "https://aaryankapoor.dev/",
+            "email": "mailto:aaryan.kapoor@unb.ca",
+            "affiliation": {
+              "@type": "CollegeOrUniversity",
+              "name": "University of New Brunswick",
+              "url": "https://www.unb.ca/"
+            },
+            "homeLocation": { "@type": "Place", "name": "Fredericton, New Brunswick, Canada" },
+            "sameAs": [
+              "https://github.com/AaryanKapoor08",
+              "https://www.linkedin.com/in/aaryan-kapoor-88a007332/"
+            ],
+            "knowsAbout": ["Artificial Intelligence", "AI Agents", "Retrieval-Augmented Generation", "LangGraph", "React", "TypeScript", "Python"]
+          }
+        ]
       }
     </script>
 </head>
 
   <body>
     <div id="root"></div>
+    <noscript>
+      <main>
+        <h1>Aaryan Kapoor</h1>
+        <p>Computer Science student at the University of New Brunswick (UNB) in Fredericton, Canada, building AI developer tools, agent infrastructure, and retrieval systems with TypeScript, Python, LangGraph, and RAG.</p>
+        <h2>Projects</h2>
+        <ul>
+          <li><a href="https://github.com/AaryanKapoor08/promptgod">PromptGod</a>: Chrome extension that rewrites prompts inside major AI chat tools.</li>
+          <li><a href="https://github.com/AaryanKapoor08/software_maintenance_agent">Software Maintenance Agent</a>: local coding agent for small, testable maintenance fixes.</li>
+          <li><a href="https://github.com/PriyanArora/shorecheck">ShoreCheck</a>: Halifax beach water-quality dashboard, Best Student Team at the Anthropic Halifax Hackathon.</li>
+          <li><a href="https://github.com/AaryanKapoor08/keepline">Keepline</a>: turns Slack, email, and ticket history into versioned, cited facts.</li>
+          <li><a href="https://github.com/AaryanKapoor08/whis">whis</a>: voice agent that runs a Windows 11 PC from plain speech.</li>
+          <li><a href="https://github.com/AaryanKapoor08/dolos">Dolos</a>: real-time financial-crime detection platform.</li>
+          <li><a href="https://github.com/AaryanKapoor08/loopd">loopd</a>: control plane for AI agent loops.</li>
+        </ul>
+        <p><a href="/research">Research: Embedded LLM Research Harness at UNB</a></p>
+        <p>
+          <a href="https://github.com/AaryanKapoor08">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/aaryan-kapoor-88a007332/">LinkedIn</a> ·
+          <a href="mailto:aaryan.kapoor@unb.ca">aaryan.kapoor@unb.ca</a> ·
+          <a href="/AaryanKapoor_Resume.pdf">Resume (PDF)</a>
+        </p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

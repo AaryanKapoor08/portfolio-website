@@ -331,10 +331,25 @@ const Stat: React.FC<{ value: string; label: string; tone?: string }> = ({ value
 
 const Research: React.FC = () => {
   useEffect(() => {
-    const previous = document.title;
+    // index.html's canonical/description describe the home page; point them at
+    // this page while it's mounted so search engines index /research on its own.
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const previous = {
+      title: document.title,
+      canonical: canonical?.href,
+      description: description?.content,
+    };
     document.title = 'Research · Aaryan Kapoor';
+    canonical?.setAttribute('href', 'https://aaryankapoor.dev/research');
+    description?.setAttribute(
+      'content',
+      'Aaryan Kapoor’s undergraduate research at the University of New Brunswick: an embedded LLM research harness comparing multi-agent and single-prompt Arduino firmware generation.',
+    );
     return () => {
-      document.title = previous;
+      document.title = previous.title;
+      if (canonical && previous.canonical) canonical.setAttribute('href', previous.canonical);
+      if (description && previous.description) description.setAttribute('content', previous.description);
     };
   }, []);
 
